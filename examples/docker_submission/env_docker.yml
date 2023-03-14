@@ -1,0 +1,23 @@
+name: monai10
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - torchaudio
+  - torchvision
+  - cpuonly
+  - pytorch=1.12.1
+  - monai=1.0
+  - scikit-image
+  - nibabel
+  - pillow
+  - einops
+  - psutil
+  - tqdm
+  - gdown
+  - pydicom
+  - pynrrd
+  - transformers
