@@ -5,6 +5,7 @@ import getpass
 import os
 import tarfile
 import time
+from pathlib import Path
 
 import docker
 import synapseclient
@@ -199,16 +200,21 @@ def main(syn, args):
     # Try to remove the image
     remove_docker_image(docker_image)
 
-    output_folder = os.listdir(output_dir)
-    if not output_folder:
-        raise Exception("No 'predictions.csv' file written to /output, "
+    input_folder = Path(input_dir)
+    input_files = input_folder.glob("*.nii*")
+
+    output_folder = Path(output_dir)
+    if not list(output_folder.iterdir()):
+        raise Exception("No files written to /output, "
                         "please check inference docker")
-    elif "predictions.csv" not in output_folder:
-        raise Exception("No 'predictions.csv' file written to /output, "
-                        "please check inference docker")
+    else:
+        for file in input_files:
+            if not list(output_folder.glob('{}*.nii*'.format(file.name.split('.')[0]))):
+                raise Exception("No prediction file written to /output for input file {},"
+                                "\nplease check inference docker".format(file.name))
     # CWL has a limit of the array of files it can accept in a folder
     # therefore creating a tarball is sometimes necessary
-    # tar(output_dir, 'outputs.tar.gz')
+    tar(output_dir, 'outputs.tar.gz')
 
 
 if __name__ == '__main__':
