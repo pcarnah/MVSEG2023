@@ -61,7 +61,7 @@ xform = Compose([
     EnsureTyped(keys),
     Spacingd(keys, [0.25,0.25,0.25], diagonal=True, mode='bilinear'),
     Orientationd(keys, axcodes='RAS'),
-    AsDiscreted(keys, to_onehot=2, rounding="torchrounding"),
+    AsDiscreted(keys, to_onehot=3, rounding="torchrounding"),
 ])
 
 ds = Dataset(d, xform)

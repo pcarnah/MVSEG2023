@@ -7,9 +7,11 @@ import tarfile
 import time
 from pathlib import Path
 
+import sys
+print(sys.version)
+
 import docker
 import synapseclient
-
 
 def create_log_file(log_filename, log_text=None):
     """Create log file"""
