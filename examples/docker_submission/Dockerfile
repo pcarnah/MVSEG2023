@@ -16,5 +16,5 @@ RUN python -c "import torch"
  
 # Python program to run in the container
 COPY run_model.py .
-COPY model_v07.md model.md
+COPY final_model_mvseg.pt model.md
 ENTRYPOINT ["conda", "run", "-n", "monai10", "python", "run_model.py"]

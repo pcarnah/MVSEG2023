@@ -18,7 +18,7 @@ d = [{"image": im} for im in images]
 xform = Compose([
     LoadImaged('image'),
     EnsureChannelFirstd('image'),
-    Spacingd('image', [0.5,0.5,0.5], diagonal=True, mode='bilinear'),
+    Spacingd('image', [0.3,0.3,0.3], diagonal=True, mode='bilinear'),
     Orientationd('image', axcodes='RAS'),
     ScaleIntensityd("image"),
     EnsureTyped('image'),
@@ -27,7 +27,7 @@ xform = Compose([
 post_tform = Compose(
     [Activations(softmax=True),
      AsDiscrete(argmax=True),
-     KeepLargestConnectedComponent(applied_labels=1)
+     KeepLargestConnectedComponent(applied_labels=[1,2])
      ]
 )
 
